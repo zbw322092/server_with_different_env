@@ -1,0 +1,17 @@
+{
+  "name": "server_with_different_env",
+  "version": "1.0.0",
+  "description": "build a server with development and production enviorment, with express, gulp, webpack and babel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bowen Zhong",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.1"
+  },
+  "devDependencies": {
+    "chalk": "^1.1.3"
+  }
+}
