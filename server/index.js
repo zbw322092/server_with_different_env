@@ -37,7 +37,7 @@ app.get('/about', function(req, res) {
 	res.sendFile(path.join(__dirname, '../client/abouttest/views/about.html'));
 });
 
-app.listen(8000, function() {
-	console.log(chalk.green('server is listening on port 8000'));
+app.listen(process.env.PORT, function() {
+	console.log(chalk.green('server is listening on port ' + process.env.PORT));
 });
 

@@ -4,11 +4,22 @@ var gulp = require('gulp');
 var gulpLoadPlugins = require('gulp-load-plugins');
 var nodemon = require('nodemon');
 var chalk = require('chalk');
+var runSequence = require('run-sequence');
 
 var plugins = gulpLoadPlugins();
 
 let clientPath = 'client';
 let serverPath = 'server';
+
+const path = {
+	client: {
+
+	},
+	server: {
+
+	},
+	dist: 'public'
+};
 
 function getEnvModules(args, iterator) {
 	return args.modules ? args.modules.split(/\s+/).map(iterator) : null;
@@ -23,7 +34,7 @@ gulp.task('env:all', function() {
 	// overwrite porcess.env properties values
 	plugins.env({
 		vars: {
-			PORT: 8888,
+			PORT: 8000,
 			NODE_ENV: 'development',
 	    DEBUG: 'app:*,',
 	    DEBUG_COLORS: true
@@ -31,10 +42,9 @@ gulp.task('env:all', function() {
 	});
 });
 
-gulp.task('env:dev', function() {
+gulp.task('start:server', function() {
   nodemon({
     script: 'server/index.js',
-    ext: 'js html',
     verbose: true,
     watch: [
     	`${serverPath}/views/`
@@ -43,6 +53,13 @@ gulp.task('env:dev', function() {
   }).on('log', function(log) {
   	nodemonLog(log);
   });
+});
+
+gulp.task('server', function() {
+	runSequence(
+		'env:all',
+		'start:server'
+	);
 });
 
 
