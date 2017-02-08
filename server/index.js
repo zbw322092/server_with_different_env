@@ -9,7 +9,6 @@ var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var helpers = require('handlebars-helpers')();
 
-
 var env = app.get('env');
 
 app.use(morgan('dev'))
