@@ -1,3 +1,4 @@
+const path = require('path');
 const chalk = require('chalk');
 const express = require('express');
 var exphbs  = require('express-handlebars');
@@ -8,8 +9,14 @@ var methodOverride = require('method-override');
 var cookieParser = require('cookie-parser');
 var helpers = require('handlebars-helpers')();
 
-console.log(app.get('env'));
-// console.log(app);
+
+var env = app.get('env');
+
+app.use(morgan('dev'))
+   .use(bodyParser({extended: false}))
+   .use(bodyParser.json())
+   .use(methodOverride())
+   .use(cookieParser());
 
 app.engine('.hbs', exphbs({
 	defaultLayout: 'main',
@@ -23,14 +30,12 @@ app.set('view engine', '.hbs');
 
 app.set('views', process.cwd() + '/server/views/');
 
-app.use(morgan('short'))
-   .use(bodyParser({extended: false}))
-   .use(bodyParser.json())
-   .use(methodOverride())
-   .use(cookieParser());
-
 app.get('/test', function(req, res) {
 	res.render('home');
+});
+
+app.get('/about', function(req, res) {
+	res.sendFile(path.join(__dirname, '../client/abouttest/views/about.html'));
 });
 
 app.listen(8000, function() {
