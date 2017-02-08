@@ -1,3 +1,5 @@
+// we do some basic express configurations here, but we move server listening out to another
+// individual file.
 const path = require('path');
 const chalk = require('chalk');
 const express = require('express');
@@ -37,7 +39,8 @@ app.get('/about', function(req, res) {
 	res.sendFile(path.join(__dirname, '../client/abouttest/views/about.html'));
 });
 
-app.listen(process.env.PORT, function() {
-	console.log(chalk.green('server is listening on port ' + process.env.PORT));
-});
+// app.listen(process.env.PORT, function() {
+// 	console.log(chalk.green('server is listening on port ' + process.env.PORT));
+// });
 
+module.exports = app;
