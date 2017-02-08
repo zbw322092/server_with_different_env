@@ -2,6 +2,10 @@ const chalk = require('chalk');
 const express = require('express');
 var exphbs  = require('express-handlebars');
 var app = express();
+var morgan = require('morgan');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
+var cookieParser = require('cookie-parser');
 var helpers = require('handlebars-helpers')();
 
 console.log(app.get('env'));
@@ -9,7 +13,8 @@ console.log(app.get('env'));
 
 app.engine('.hbs', exphbs({
 	defaultLayout: 'main',
-	layoutsDir: process.cwd() + '/server/views/layouts',
+	layoutsDir: 'server/views/layouts',
+	partialsDir: 'server/views/partials/',
 	extname: '.hbs',
 	helpers: helpers
 }));
@@ -17,6 +22,12 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 app.set('views', process.cwd() + '/server/views/');
+
+app.use(morgan('short'))
+   .use(bodyParser({extended: false}))
+   .use(bodyParser.json())
+   .use(methodOverride())
+   .use(cookieParser());
 
 app.get('/test', function(req, res) {
 	res.render('home');

@@ -9,7 +9,13 @@
   "author": "Bowen Zhong",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.1",
+    "express-handlebars": "^3.0.0",
+    "handlebars-helpers": "^0.8.0",
+    "method-override": "^2.3.7",
+    "morgan": "^1.8.0"
   },
   "devDependencies": {
     "chalk": "^1.1.3"
