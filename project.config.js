@@ -7,10 +7,13 @@ module.exports = {
 	hostProxy: 'http://my.testing.com',
 	webpack: {
 		entry: {
-			[`${projectVirtualPath}/about`]: ['./client/abouttest']
+			[`${projectVirtualPath}/default`]: ['./client/default'],
+			[`${projectVirtualPath}/about`]: ['./client/about'],
+			[`${projectVirtualPath}/home`]: ['./client/home'],
+			[`${projectVirtualPath}/blogs`]: ['./client/blogs'],
 		},
 		output: {
-			
+
 		}
 	}
 }
