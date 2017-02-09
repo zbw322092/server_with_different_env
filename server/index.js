@@ -6,3 +6,4 @@ if (nodeEnv === 'development' || nodeEnv === 'test') {
 	require('babel-register');
 }
 
+require('./app.js')();
