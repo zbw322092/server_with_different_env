@@ -31,13 +31,15 @@ app.set('view engine', '.hbs');
 
 app.set('views', process.cwd() + '/server/views/');
 
+require('./routes.js')(app);
+
 app.get('/test', function(req, res) {
 	res.render('home');
 });
 
-app.get('/about', function(req, res) {
-	res.sendFile(path.join(__dirname, '../client/abouttest/views/about.html'));
-});
+// app.get('/about', function(req, res) {
+// 	res.sendFile(path.join(__dirname, '../client/abouttest/views/about.html'));
+// });
 
 // app.listen(process.env.PORT, function() {
 // 	console.log(chalk.green('server is listening on port ' + process.env.PORT));
