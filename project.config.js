@@ -13,7 +13,7 @@ module.exports = {
 			[`${projectVirtualPath}/blogs`]: ['./client/blogs'],
 		},
 		output: {
-
+			prodPublicPath: '//testpath'
 		}
 	}
 }

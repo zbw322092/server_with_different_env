@@ -4,6 +4,7 @@ var jclrz = require('json-colorz');
 var minimatch = require('minimatch');
 var path = require('path');
 var projectConfig = require('../project.config.js');
+var envConfig = require('../server/env.config.js');
 
 // what we need to do is compile codes according to the module names developer typed
 // we need to filter out entries and outputs.
@@ -18,6 +19,11 @@ var projectConfigWebpack = projectConfig.webpack;
 //      'server_with_different_env/testing_project/blogs': [ './client/blogs' ] },
 //   output: {} 
 // }
+
+// detect environment
+function isDev(env) {
+  return env && env === 'production' ? false : true;
+}
 
 // the returned value should be a object with name and file path pairs, which is the entry
 // of webpack configuration.
@@ -39,6 +45,18 @@ function entriesFilter() {
 
 console.log(entriesFilter());
 
+function outputFilter() {
+	var env = process.env.NODE_ENV || 'development';
+	var port = process.env.PORT || envConfig.port;
+	var devPath = `${projectConfig.hostProxy}:${port}/public/`;
+	return {
+		path: path.resolve(__dirname, '../public/'),
+		filename: './[name]/bundle.js?[hash]',
+		publicPath: isDev(env) ? devPath : projectConfigWebpack.output
+	};
+}
+
+console.log(outputFilter());
 
 
 
