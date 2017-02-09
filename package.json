@@ -32,9 +32,14 @@
     "gulp-load-plugins": "^1.5.0",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^4.3.11",
+    "json-colorz": "^0.2.7",
+    "minimatch": "^3.0.3",
     "nodemon": "^1.11.0",
     "portscanner": "^2.1.1",
     "run-sequence": "^1.2.2",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-config": "^7.0.0",
+    "webpack-dev-middleware": "^1.10.0",
+    "webpack-hot-middleware": "^2.16.1"
   }
 }

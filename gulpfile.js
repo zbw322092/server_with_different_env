@@ -31,13 +31,22 @@ function nodemonLog(log) {
 }
 
 gulp.task('env:all', function() {
+
+  var modules = getEnvModules(plugins.util.env, (module) => {
+    return `./${clientPath}/${module}`;
+  }) || [];
+
+  console.log(plugins.util.env);
+  console.log(modules);
+
 	// overwrite porcess.env properties values
 	plugins.env({
 		vars: {
 			PORT: 8000,
 			NODE_ENV: 'development',
 	    DEBUG: 'app:*,',
-	    DEBUG_COLORS: true
+	    DEBUG_COLORS: true,
+	    ENTRY_MODULES: JSON.stringify(modules)
 		}
 	});
 });
