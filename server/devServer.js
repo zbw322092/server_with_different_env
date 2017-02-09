@@ -4,6 +4,7 @@
 var app = require('./express.config.js');
 var env = app.get('env');
 var chalk = require('chalk');
+var browserSync = require('browser-sync');
 
 function isDev(env) {
 	return env === 'development';
@@ -17,7 +18,22 @@ app.devServer = function(port) {
 	// ...
 
 	app.listen(port, function() {
-		console.log(chalk.underline.yellow('Express Server is listening on port '.toUpperCase() + port));
+		console.log(chalk.underline.green('Express Server is listening on port '.toUpperCase() + port));
+		if (isDev(env)) {
+			setImmediate(function() {
+				browserSync.create().init({
+					ui: {
+						weinre: {
+							port: 9090
+						}
+					},
+					open: false,
+					notify: false,
+					files: ['./client/**'],
+					proxy: 'localhost:'+port
+				});
+			});
+		}
 	});
 };
 
