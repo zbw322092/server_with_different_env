@@ -61,12 +61,9 @@ function outputFilter() {
 
 console.log(outputFilter());
 
-module.exports = {
-	webpackConfig: function() {
-		var webpackOutput = outputFilter();
-		
-	}
-}
+module.exports = function webpackConfig () {
+	var webpackOutput = outputFilter();
+};
 
 
 
