@@ -5,6 +5,9 @@ var minimatch = require('minimatch');
 var path = require('path');
 var projectConfig = require('../project.config.js');
 var envConfig = require('../server/env.config.js');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var Config = require('webpack-config');
+
 
 // what we need to do is compile codes according to the module names developer typed
 // we need to filter out entries and outputs.
@@ -58,6 +61,12 @@ function outputFilter() {
 
 console.log(outputFilter());
 
+module.exports = {
+	webpackConfig: function() {
+		var webpackOutput = outputFilter();
+		
+	}
+}
 
 
 
