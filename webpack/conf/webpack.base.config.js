@@ -5,9 +5,6 @@ module.exports = new Config.merge({
 	externals: {
 		jquery: '$'
 	},
-	plugins: [
-
-	],
 	module: {
 		loaders: [
 			{ test: /\.css$/i, loader: ExtractTextPlugin.extract('style', 'css') },

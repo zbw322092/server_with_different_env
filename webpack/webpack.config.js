@@ -63,6 +63,23 @@ console.log(outputFilter());
 
 module.exports = function webpackConfig () {
 	var webpackOutput = outputFilter();
+	var urlLoaderQuery = _.merge({
+	      limit: 5000,
+	      context: 'client',
+	      name: `${projectVirtualPath}/[path][name].[ext]?[hash]`
+	    }, projectConfigWebpack.urlLoaderQuery);
+
+	return new Config().extend('[webpackRoot]/conf/webpack.[env].config.js')
+		.merge({
+			entry: entry,
+			output: output,
+			module: {
+				loaders: [
+					{ test: /\.(png|jpg|gif)$/, loader: "url-loader", query: urlLoaderQuery },
+					{ test: /\.js|jsx$/, loader: 'babel-loader?presets[]=es2015', exclude: /(node_modules|bower_components)/ }
+				]
+			}
+		});
 };
 
 

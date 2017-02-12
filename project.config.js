@@ -14,6 +14,9 @@ module.exports = {
 		},
 		output: {
 			prodPublicPath: '//testpath'
+		},
+		urlLoaderQuery: {
+			limit: 5000
 		}
 	}
 }
