@@ -1,7 +1,7 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var Config = require('webpack-config');
+import Config from 'webpack-config';
 
-module.exports = new Config.merge({
+module.exports = new Config().merge({
 	externals: {
 		jquery: '$'
 	},

@@ -1,10 +1,11 @@
 'use strict';
 
 var webpack = require('webpack');
-var Config = require('webpack-config');
-var webpackConfig = require('../webpack.config.js');
+import Config, { environment } from 'webpack-config';
+import webpackConfEnv from '../webpack.config.env';
 
-webpackConfig();
+webpackConfEnv(environment);
+
 
 module.exports = new Config().extend('[webpackRoot]/conf/webpack.base.config.js').merge({
 	output: {

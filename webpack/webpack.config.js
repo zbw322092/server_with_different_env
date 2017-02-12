@@ -1,3 +1,5 @@
+'use strict';
+
 var chalk = require('chalk');
 var _ = require('lodash');
 var jclrz = require('json-colorz');
@@ -6,7 +8,10 @@ var path = require('path');
 var projectConfig = require('../project.config.js');
 var envConfig = require('../server/env.config.js');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var Config = require('webpack-config');
+import Config, { environment } from 'webpack-config';
+import webpackConfigEnv from './webpack.config.env.js';
+
+console.log('tttttttttttttt: ', Config);
 
 
 // what we need to do is compile codes according to the module names developer typed
@@ -62,7 +67,11 @@ function outputFilter() {
 console.log(outputFilter());
 
 module.exports = function webpackConfig () {
+	webpackConfigEnv(environment);
+
 	var webpackOutput = outputFilter();
+	var projectVirtualPath = envConfig.projectVirtualPath;
+
 	var urlLoaderQuery = _.merge({
 	      limit: 5000,
 	      context: 'client',
@@ -72,7 +81,7 @@ module.exports = function webpackConfig () {
 	return new Config().extend('[webpackRoot]/conf/webpack.[env].config.js')
 		.merge({
 			entry: entry,
-			output: output,
+			output: webpackOutput,
 			module: {
 				loaders: [
 					{ test: /\.(png|jpg|gif)$/, loader: "url-loader", query: urlLoaderQuery },
