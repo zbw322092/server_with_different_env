@@ -84,6 +84,7 @@ module.exports = function webpackConfig () {
 			output: webpackOutput,
 			module: {
 				loaders: [
+					{ test: /\.html$/, loader: 'html', query: { minimize: true } },
 					{ test: /\.(png|jpg|gif)$/, loader: "url-loader", query: urlLoaderQuery },
 					{ test: /\.js|jsx$/, loader: 'babel-loader?presets[]=es2015', exclude: /(node_modules|bower_components)/ }
 				]
