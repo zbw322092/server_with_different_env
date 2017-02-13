@@ -5,15 +5,15 @@ module.exports = new Config().merge({
 	externals: {
 		jquery: '$'
 	},
+  plugins: [
+    new ExtractTextPlugin('./[name]/bundle.css?[hash]', { allChunks: true })
+  ],
 	module: {
 		loaders: [
 			{ test: /\.css$/i, loader: ExtractTextPlugin.extract('style', 'css') },
       { test: /\.less$/i, loader: ExtractTextPlugin.extract('style', 'css!less') }
 		]
 	},
-  plugins: [
-    new ExtractTextPlugin('./[name]/bundle.css?[hash]', { allChunks: true })
-  ],
   resolve: {
   	root: [
   		process.cwd()

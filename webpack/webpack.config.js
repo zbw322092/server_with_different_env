@@ -11,8 +11,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 import Config, { environment } from 'webpack-config';
 import webpackConfigEnv from './webpack.config.env.js';
 
-console.log('tttttttttttttt: ', Config);
-
 
 // what we need to do is compile codes according to the module names developer typed
 // we need to filter out entries and outputs.
@@ -60,7 +58,7 @@ function outputFilter() {
 	return {
 		path: path.resolve(__dirname, '../public/'),
 		filename: './[name]/bundle.js?[hash]',
-		publicPath: isDev(env) ? devPath : projectConfigWebpack.output
+		publicPath: isDev(env) ? devPath : projectConfigWebpack.output.prodPublicPath
 	};
 }
 

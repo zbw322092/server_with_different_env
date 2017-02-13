@@ -13,7 +13,7 @@ module.exports = {
 			[`${projectVirtualPath}/blogs`]: ['./client/blogs'],
 		},
 		output: {
-			prodPublicPath: '//testpath'
+			prodPublicPath: '//testpath/'
 		},
 		urlLoaderQuery: {
 			limit: 5000

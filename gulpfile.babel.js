@@ -5,13 +5,17 @@ var gulpLoadPlugins = require('gulp-load-plugins');
 var nodemon = require('nodemon');
 var chalk = require('chalk');
 var runSequence = require('run-sequence');
+var named = require('vinyl-named');
+var webpackStream = require('webpack-stream');
+var del = require('del');
+
 
 var plugins = gulpLoadPlugins();
 
 let clientPath = 'client';
 let serverPath = 'server';
 
-const path = {
+const paths = {
 	client: {
 
 	},
@@ -51,6 +55,24 @@ gulp.task('env:all', function() {
 	});
 });
 
+gulp.task('env:prod', function() {
+	plugins.env({
+		vars: {
+			NODE_ENV: 'production'
+		}
+	});
+});
+
+gulp.task('webpack:prod', function() {
+	var webpackConfig = require('./webpack/webpack.config.js')();
+	var webpackCompiler = webpackStream(webpackConfig);
+
+	return gulp.src([])
+		.pipe(named())
+		.pipe(webpackCompiler)
+		.pipe(gulp.dest(paths.dist));
+});
+
 gulp.task('start:server', function() {
   nodemon({
     script: 'server/index.js',
@@ -68,6 +90,14 @@ gulp.task('server', function() {
 	runSequence(
 		'env:all',
 		'start:server'
+	);
+});
+
+gulp.task('build', function() {
+	runSequence(
+    'env:all',
+    'env:prod',
+    'webpack:prod'
 	);
 });
 
